@@ -57,4 +57,15 @@ public class Pedido {
 
     // para valor total criar um metodo que multiple produto * quantidade a cada item_pedido e depois some tudo.
 
+    public BigDecimal valorPedido(){
+        BigDecimal valorTotal = BigDecimal.ZERO;
+
+
+        for (ItemPedido i : itens){
+           valorTotal = valorTotal.add(i.getSubTotal()) ;
+        }
+
+        return valorTotal;
+    }
+
 }
