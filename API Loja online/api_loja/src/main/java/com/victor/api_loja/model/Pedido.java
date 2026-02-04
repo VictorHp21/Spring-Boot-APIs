@@ -1,10 +1,12 @@
 package com.victor.api_loja.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,9 +22,9 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<ItemPedido> itens;
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<ItemPedido> itens = new ArrayList<>();
 
     private BigDecimal valorTotal;
 
@@ -33,6 +35,22 @@ public class Pedido {
         this.data_e_hora = data_e_hora;
         this.cliente = cliente;
         this.itens = itens;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public void setData_e_hora(LocalDateTime data_e_hora) {
+        this.data_e_hora = data_e_hora;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+            this.itens = itens;
+
+            if (itens != null) {
+                itens.forEach(i -> i.setPedido(this));
+            }
     }
 
     public Long getId() {

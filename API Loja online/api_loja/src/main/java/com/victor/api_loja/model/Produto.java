@@ -34,6 +34,10 @@ public class Produto {
         this.quantidade_disponivel = quantidade_disponivel;
     }
 
+    public void setQuantidade_disponivel(Integer quantidade_disponivel) {
+        this.quantidade_disponivel = quantidade_disponivel;
+    }
+
     public Long getId() {
         return id;
     }

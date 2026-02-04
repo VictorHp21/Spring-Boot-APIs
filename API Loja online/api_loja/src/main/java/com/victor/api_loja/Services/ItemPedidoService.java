@@ -25,6 +25,16 @@ public class ItemPedidoService {
     }
 
     public ItemPedido cadastrarItemPedido(ItemPedido itemPedido){
+        if (itemPedido.getProduto() == null) {
+            throw new RuntimeException("Produto é obrigatório para o item do pedido.");
+        }
+        if (itemPedido.getPedido() == null) {
+            throw new RuntimeException("Pedido é obrigatório para o item do pedido.");
+        }
+        if (itemPedido.getQuantidade() == null || itemPedido.getQuantidade() <= 0) {
+            throw new RuntimeException("Quantidade deve ser maior que zero.");
+        }
+
         return repository.save(itemPedido);
     }
 
