@@ -16,7 +16,7 @@ public class ItemPedidoService {
         this.repository = repository;
     }
 
-    public List<ItemPedido> listarPedidos(){
+    public List<ItemPedido> listarItem_Pedidos(){
         return repository.findAll();
     }
 

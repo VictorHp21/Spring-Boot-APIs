@@ -1,5 +1,6 @@
 package com.victor.api_loja.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
 
@@ -19,7 +20,8 @@ public class Produto {
     private BigDecimal preco_unitario;
     private Integer quantidade_disponivel;
 
-    @OneToMany(mappedBy = "produtos", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ItemPedido> itensPedidos;
 
 

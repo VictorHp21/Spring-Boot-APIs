@@ -7,14 +7,21 @@ import com.victor.api_loja.model.Produto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/pedidos")
 public class PedidoController {
 
     private final PedidoService service;
 
     public PedidoController(PedidoService service){
         this.service = service;
+    }
+
+    @GetMapping
+    public List<Pedido> listarPedidos(){
+        return service.listarPedidos();
     }
 
     @GetMapping("/{id}")

@@ -5,6 +5,8 @@ import com.victor.api_loja.model.Produto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
@@ -13,6 +15,11 @@ public class ProdutoController {
 
     public ProdutoController (ProdutoService service){
         this.service = service;
+    }
+
+    @GetMapping
+    public List<Produto> listarProdutos(){
+        return service.listarProdutos();
     }
 
     @GetMapping("/{id}")

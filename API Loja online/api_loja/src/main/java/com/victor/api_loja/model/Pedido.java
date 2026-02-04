@@ -1,5 +1,6 @@
 package com.victor.api_loja.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -15,11 +16,12 @@ public class Pedido {
     private Long id;
     private LocalDateTime data_e_hora;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ItemPedido> itens;
 
     private BigDecimal valorTotal;
